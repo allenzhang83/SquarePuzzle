@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquarePuzzle", "SquarePuzzle\SquarePuzzle.csproj", "{EAB5C116-15A9-4A10-81C8-87E0CD964B26}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquarePuzzle.Test", "SquarePuzzle.Test\SquarePuzzle.Test.csproj", "{7A9D53B5-28C5-41E5-B036-3E868BE97BD7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EAB5C116-15A9-4A10-81C8-87E0CD964B26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAB5C116-15A9-4A10-81C8-87E0CD964B26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAB5C116-15A9-4A10-81C8-87E0CD964B26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAB5C116-15A9-4A10-81C8-87E0CD964B26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A9D53B5-28C5-41E5-B036-3E868BE97BD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A9D53B5-28C5-41E5-B036-3E868BE97BD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A9D53B5-28C5-41E5-B036-3E868BE97BD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A9D53B5-28C5-41E5-B036-3E868BE97BD7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E2658B54-7071-4239-ACD8-6E5F812A4464}
+	EndGlobalSection
+EndGlobal

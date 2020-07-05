@@ -9,6 +9,14 @@ namespace SquarePuzzle
 {
     public class Program
     {
+        private static List<int[]> newSquarePositions = new List<int[]>
+        {
+            new int[] { 1 , 0 }, // east
+            new int[] { -1 , 0 }, // west
+            new int[] { 0 , 1 }, // north
+            new int[] { 0 , -1 }, // south
+        };
+
         static void Main(string[] args)
         {
             while (true)
@@ -37,9 +45,9 @@ namespace SquarePuzzle
                 var initialShape = InitUniqueShape();
 
                 var previousUniqueShapes = new List<Shape>
-            {
-                initialShape
-            };
+                {
+                    initialShape
+                };
 
                 var currentUniqueShapes = new List<Shape>();
 
@@ -50,14 +58,17 @@ namespace SquarePuzzle
                     {
                         foreach (var square in shape.Squares)
                         {
-                            foreach (var side in square.Sides)
+                            foreach (var newSquarePosition in newSquarePositions)
                             {
-                                if (side.HasAdjacentSquare)
+                                var newX = newSquarePosition[0] + square.X;
+                                var newY = newSquarePosition[1] + square.Y;
+
+                                if (!PositionAvailable(newX, newY, shape.Squares))
                                 {
                                     continue;
                                 }
 
-                                var newShape = AddSquare(shape, square, side);
+                                var newShape = AddSquare(shape, square, newX, newY);
 
                                 var isUnique = ShapeChecker.IsNewShapreUnique(newShape, currentUniqueShapes);
 
@@ -77,6 +88,11 @@ namespace SquarePuzzle
                 Console.WriteLine($"{numberOfSquares} squares has {previousUniqueShapes.Count()} solutions.");
                 Console.ReadLine();
             }            
+        }
+
+        private static bool PositionAvailable(int newX, int newY, List<Square> squares)
+        {
+            return !squares.Any(s => s.X == newX && s.Y == newY);
         }
 
         private static void PrintShapes(List<Shape> previousUniqueShapes)
@@ -110,7 +126,7 @@ namespace SquarePuzzle
             }
         }
 
-        private static Shape AddSquare(Shape previousUniqueShape, Square square, Side side)
+        private static Shape AddSquare(Shape previousUniqueShape, Square square, int newX, int newY)
         {
             var newShape = new Shape();
 
@@ -118,43 +134,14 @@ namespace SquarePuzzle
             var otherSquares = previousUniqueShape.Squares.Where(s => s != square);
             foreach(var existingSquare in previousUniqueShape.Squares)
             {
-                var cloneSquare = new Square(existingSquare.X, existingSquare.Y);
-                for (var i = 0; i < 4; i++)
-                {
-                    cloneSquare.Sides[i].Direction = existingSquare.Sides[i].Direction;
-                    cloneSquare.Sides[i].HasAdjacentSquare = existingSquare.Sides[i].HasAdjacentSquare;                    
-                }
+                var cloneSquare = new Square(existingSquare.X, existingSquare.Y);                
                 newShape.Squares.Add(cloneSquare);
             }
 
-            // add new square
-            var x = 0;
-            var y = 0;
-
-            switch (side.Direction)
-            {
-                case Direction.East:
-                    x = square.X + 1;
-                    y = square.Y;
-                    break;
-                case Direction.West:
-                    x = square.X - 1;
-                    y = square.Y;
-                    break;
-                case Direction.North:
-                    x = square.X;
-                    y = square.Y + 1;
-                    break;
-                case Direction.South:
-                    x = square.X;
-                    y = square.Y - 1;
-                    break;
-            }
-
-            var newSquare = new Square(x, y);
+            // add new square           
+            var newSquare = new Square(newX, newY);
             newShape.Squares.Add(newSquare);
-            newShape.CalculateTouchingSide();
-
+            
             return newShape;
         }
 

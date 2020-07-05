@@ -66,48 +66,5 @@ namespace SquarePuzzle.Models
                 square.Y = (0 - square.Y);
             }
         }
-
-        public void CalculateTouchingSide()
-        {
-            foreach (var square in Squares)
-            {
-                foreach (Direction direction in Enum.GetValues(typeof(Direction)))
-                {
-                    if (HasAdjacent(square, direction))
-                    {
-                        var side = square.Sides.First(s => s.Direction == direction);
-                        side.HasAdjacentSquare = true;
-                    }
-                }                
-            }
-        }
-
-        private bool HasAdjacent(Square square, Direction direction)
-        {
-            int x = 0;
-            int y = 0;
-
-            switch (direction)
-            {
-                case Direction.East:
-                    x = square.X + 1;
-                    y = square.Y;
-                    break;
-                case Direction.West:
-                    x = square.X - 1;
-                    y = square.Y;
-                    break;
-                case Direction.North:
-                    x = square.X;
-                    y = square.Y + 1;
-                    break;
-                case Direction.South:
-                    x = square.X;
-                    y = square.Y - 1;
-                    break;
-            }
-
-            return Squares.Any(s => s.X == x && s.Y == y);
-        }
     }
 }
